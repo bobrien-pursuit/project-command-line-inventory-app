@@ -1,0 +1,17 @@
+[
+    {
+      "name": "Lavendar Dream",
+      "priceInCents": 500,
+      "inStock": true
+    },
+    {
+      "name": "Orange Dreamsicle",
+      "priceInCents": 500,
+      "inStock": false
+    },
+    {
+      "name": "Banana Smoothie",
+      "priceInCents": 500,
+      "inStock": true
+    }
+  ]
