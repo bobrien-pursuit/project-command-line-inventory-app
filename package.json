@@ -1,19 +1,22 @@
 {
-  "name": "project-command-line-inventory-app",
+  "name": "Soap Inventory App",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "create": "node index.js create",
-    "ls -a": "node index.js ls -a",
-    "ls": "node index.js -ls",
-    "del": "node index.js -del",
-    "update": "node index.js update",
-    "cart -add": "node index.js cart -add",
-    "cart -empty": "node index.js cart -empty" 
+    "new": "node index.js create",
+    "-ls": "node index.js index",
+    "-ls -id": "node index.js show",
+    "-del": "node index.js destroy",
+    "-u": "node index.js update",
+    "cart -add": "node index.js updateCart",
+    "cart -del": "node index.js cart removeFromCart"
   },
   "keywords": [],
   "author": "Brendan O'Brien",
   "license": "ISC",
-  "description": "This is a soap shop that sells natural handmade soap."
+  "description": "This is a soap shop that sells natural handmade soap.",
+  "dependencies": {
+    "nanoid": "^3.3.7"
+  }
 }
