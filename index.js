@@ -36,7 +36,7 @@ function run() {
             break;
         case "cartTotal":
             const cartTotal = cart.reduce((acc, curr) => acc + curr.price, 0);
-            inform(`Your Cart total is: $${cartTotal/100}`);
+            inform(`Your Cart total is: $${Number.parseFloat(cartTotal/100).toFixed(2)}`);
             break;
         case "updateCart":
             updatedCart = updateCart(cart, soaps, process.argv[3]);
