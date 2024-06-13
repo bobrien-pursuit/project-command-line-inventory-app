@@ -12,7 +12,7 @@ function create (soaps, name, priceInCents) {
  const soap =  {
         name: process.argv[3],
         id: nanoid(5),
-        priceinCents: priceInCents || 300,
+        priceInCents: priceInCents || 300,
         inStock: true,
     };
 
@@ -21,7 +21,10 @@ function create (soaps, name, priceInCents) {
 }
 
 function index(soaps) {
-    return soaps.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.price/100).toFixed(2)}`).join('\n');
+
+    console.log(soaps[0]);
+
+    return soaps ? soaps.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`).join('\n') : null;
 }
 
 function show(soaps, soapId) {
@@ -65,24 +68,24 @@ function update(soaps, soapId, updatedSoap, priceInCents) {
 }
 
 function updateCart (cart, soaps, soapId) {
-   //console.log(soaps);
-  // let parsedSoaps = JSON.parse(soaps);
+
 
      const soap = soaps.find((soap) =>
         soap.id === soapId
     );
 
-     cart.push(soap);
+    if (soap)
+     cart.push(soap)
 
      inform(`Item ${soap.name} with ID ${soap.id} has been added to your cart(${cart.length}).`)
+     const indexOfSoap = soaps.findIndex((soap) => soap.id === soapId);
+      if (indexOfSoap > -1) 
+          soaps.splice(indexOfSoap, 1);
+      else {
+          inform("Soap does not exist in inventory\n");
+          inform(index(soaps));
+      }
      
-    const indexOfSoap = soaps.findIndex((soap) => soap.id === soapId);
-     if (indexOfSoap > -1) 
-         soaps.splice(indexOfSoap, 1);
-     else {
-         inform("Soap does not exist\n");
-         inform(index(soaps));
-     }
 
      return cart;
 }
