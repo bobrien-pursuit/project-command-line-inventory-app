@@ -4,13 +4,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "new": "node index.js create",
-    "-ls": "node index.js index",
-    "-ls -id": "node index.js show",
-    "-del": "node index.js destroy",
-    "-u": "node index.js update",
-    "cart -add": "node index.js updateCart",
-    "cart -del": "node index.js cart removeFromCart"
+    "create": "node index.js create",
+    "index": "node index.js index",
+    "show": "node index.js show",
+    "destroy": "node index.js destroy",
+    "update": "node index.js update",
+    "updateCart": "node index.js updateCart",
+    "removeFromCart": "node index.js removeFromCart",
+    "emptyCart": "node index.js emptyCart"
   },
   "keywords": [],
   "author": "Brendan O'Brien",

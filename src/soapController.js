@@ -1,13 +1,19 @@
 const { nanoid } = require("nanoid");
 const { fs } = require("node:fs");
-const { soaps } = require("../data/cart.json");
-const { cart } = require("../data/soaps.json");
+const { readJSONFile, writeJSONFile } = require("../src/helpers");
+soaps = readJSONFile("data", "soaps.json");
+cart = readJSONFile("data", "cart.json");
+// const { cart } = require("../data/cart.json");
 
-function create (soaps, soapName, priceInCents) {
-    const soap = {
-        name: soapName,
+const inform = console.log;
+
+function create (soaps, name, priceInCents) {
+  
+ const soap =  {
+        name: process.argv[3],
         id: nanoid(5),
-        price: priceInCents;
+        priceinCents: priceInCents || 300,
+        inStock: true,
     };
 
     soaps.push(soap);
@@ -15,62 +21,98 @@ function create (soaps, soapName, priceInCents) {
 }
 
 function index(soaps) {
-    return soaps.map((soap) => `${soap.id} ${soap.name} $${soap.price/100}`).join
+    return soaps.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.price/100).toFixed(2)}`).join('\n');
 }
 
-function show(soaps. soapId) {
-    const soap - soaps.find((soap) => soap.id === soapId);
-    return `${soap.id} ${soap.name} unit price:${soap.price}`;
-}
-
-const inform = console.log;
+function show(soaps, soapId) {
+    
+    const soap = soaps.find((soap) => soap.id === soapId);
+    
+    return soap ? `${soap.id} ${soap.name} Unit Price: $${Number.parseFloat(soap.price/100).toFixed(2)}` : `Soap ID not in database.`;
+    
+    }
 
 function destroy (soaps, soapId) {
     const indexOfSoap = soaps.findIndex((soap) => soap.id === soapId);
     if (indexOfSoap > -1) {
         soaps.splice(indexOfSoap, 1);
-        inform("Soap removed");
+        inform("Soap removed:\n");
+        inform(index(soaps));
         return soaps;
     } else {
-        inform("Soap does not exist");
+        inform("Soap does not exist\n");
+        inform(index(soaps));
         return soaps;
     }
 
 }
 
-function update(soaps, soapId, updatedSoap) {
-    const indexOfSoap = soaps.findIndex((soap) => soap.id === soapId);
+function update(soaps, soapId, updatedSoap, priceInCents) {
+    const indexOfSoap = soaps.findIndex((soap) => soap.id === process.argv[3]);
     if (indexOfSoap > -1) {
     soaps[indexOfSoap].id = soapId;
     soaps[indexOfSoap].name = updatedSoap;
-    soaps[indexOfSoap].price = soaps[updatedSoap].price;
-    inform("Soap updated successfully");
+    soaps[indexOfSoap].price = priceInCents;
+    // soaps[updatedSoap].price;
+    inform("Soap updated successfully:\n");
+    inform(index(soaps));
     return soaps;
 } else {
-    inform("Soap doesn't exist in database.");
+    inform("Soap doesn't exist in database:\n");
+    inform(index(soaps));
     return soaps;
     }
 }
 
-function updateCart (soaps, soapId) {
-    const soap = soaps.find((soap) => soap.id === soapId);
-    cart.push(soap);
-    inform(`Item ${soap.name} with ID ${soap.id} has been added to your cart(${cart.length}).`)
+function updateCart (cart, soaps, soapId) {
+   //console.log(soaps);
+  // let parsedSoaps = JSON.parse(soaps);
+
+     const soap = soaps.find((soap) =>
+        soap.id === soapId
+    );
+
+     cart.push(soap);
+
+     inform(`Item ${soap.name} with ID ${soap.id} has been added to your cart(${cart.length}).`)
+     
+    const indexOfSoap = soaps.findIndex((soap) => soap.id === soapId);
+     if (indexOfSoap > -1) 
+         soaps.splice(indexOfSoap, 1);
+     else {
+         inform("Soap does not exist\n");
+         inform(index(soaps));
+     }
+
+     return cart;
+}
+
+function removeFromCart (cart, soaps, soapId) {
+
+    const indexOfCart = cart.findIndex((soap) => soap.id === soapId);
+    if (indexOfCart > -1 && cart.length !== 0) {
+        soaps.push(cart[indexOfCart]);
+        cart.splice(indexOfCart, 1);
+        inform(`Soap removed from cart(${cart.length})`);
+        return cart;
+    } else {
+        inform(`This ID does not match item in Cart.`)
+        return cart;
+    }
+
+}
+
+function emptyCart (cart, soaps) {
+    while (cart.length > 0) {
+
+        let temp = cart.pop();
+
+        soaps.push(temp);
+    }
+
     return cart;
 }
 
-function removeFromCart (cart, soapId) {
-    const indexOfCart = cart.findIndex((soap) => soap.id === soapId);
-    if (indexOfCart > -1 && cart.length !== 0) {
-        cart.splice(indexOfSoap, 1);
-        inform(`Soap removed removed from cart(${cart.length}`);
-        return cart;
-    } else {
-        inform("This soap is not in your cart.");
-        return cart;
-    }
-
-}
 module.exports = {
     create,
     index,
@@ -79,4 +121,5 @@ module.exports = {
     update,
     updateCart,
     removeFromCart,
+    emptyCart,
 }
