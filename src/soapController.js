@@ -11,8 +11,7 @@ function create (soaps, name, priceInCents) {
  const soap =  {
         name: process.argv[3],
         id: nanoid(5),
-        priceInCents: priceInCents || 300,
-        inStock: true,
+        priceInCents: priceInCents || 500,
     };
 
     soaps.push(soap);
