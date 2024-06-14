@@ -1,6 +1,12 @@
 [
   {
     "id": "DMWjH",
+    "name": "hello",
+    "priceInCents": "500"
+  },
+  {
+    "name": "my soap",
+    "id": "0Trj2",
     "priceInCents": 500
   }
 ]
