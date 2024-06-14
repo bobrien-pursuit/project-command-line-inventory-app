@@ -1,1 +1,36 @@
-[]
+[
+  {
+    "id": "sRdcW",
+    "name": "Hello World",
+    "priceInCents": "700"
+  },
+  {
+    "name": "Lolly Soap",
+    "id": "UcfAY",
+    "priceInCents": "700",
+    "inStock": true
+  },
+  {
+    "name": "Master Bar",
+    "id": "zkv8q",
+    "priceInCents": "750",
+    "inStock": true
+  },
+  {
+    "name": "Master Bar",
+    "id": "zkv8q",
+    "priceInCents": "750",
+    "inStock": true
+  },
+  {
+    "name": "Lolly Soap",
+    "id": "GcG5a",
+    "priceInCents": "700",
+    "inStock": true
+  },
+  {
+    "id": "sRdcW",
+    "name": "Hello World",
+    "priceInCents": "700"
+  }
+]

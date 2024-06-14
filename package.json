@@ -12,7 +12,8 @@
     "updateCart": "node index.js updateCart",
     "removeFromCart": "node index.js removeFromCart",
     "emptyCart": "node index.js emptyCart",
-    "cartTotal": "node index.js cartTotal"
+    "cartTotal": "node index.js cartTotal",
+    "indexCart": "node index.js indexCart"
   },
   "keywords": [],
   "author": "Brendan O'Brien",

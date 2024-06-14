@@ -1,25 +1,18 @@
 [
   {
-    "name": "Lolly Soap",
     "id": "UcfAY",
-    "priceInCents": "700",
+    "name": "he",
+    "priceInCents": "he"
+  },
+  {
+    "name": "Master Bar",
+    "id": "zkv8q",
+    "priceInCents": "750",
     "inStock": true
   },
   {
     "name": "Lolly Soap",
     "id": "GcG5a",
-    "priceInCents": "700",
-    "inStock": true
-  },
-  {
-    "name": "Lolly Soap",
-    "id": "KyK-W",
-    "priceInCents": "700",
-    "inStock": true
-  },
-  {
-    "name": "Lolly Soap",
-    "id": "sRdcW",
     "priceInCents": "700",
     "inStock": true
   }

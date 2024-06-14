@@ -1,9 +1,8 @@
 const { nanoid } = require("nanoid");
 const { fs } = require("node:fs");
-const { readJSONFile, writeJSONFile } = require("../src/helpers");
+const { readJSONFile } = require("../src/helpers");
 soaps = readJSONFile("data", "soaps.json");
 cart = readJSONFile("data", "cart.json");
-// const { cart } = require("../data/cart.json");
 
 const inform = console.log;
 
@@ -22,8 +21,7 @@ function create (soaps, name, priceInCents) {
 
 function index(soaps) {
 
-    console.log(soaps[0]);
-
+    inform(`-- Current Inventory --`)
     return soaps ? soaps.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`).join('\n') : null;
 }
 
@@ -31,7 +29,7 @@ function show(soaps, soapId) {
     
     const soap = soaps.find((soap) => soap.id === soapId);
     
-    return soap ? `${soap.id} ${soap.name} Unit Price: $${Number.parseFloat(soap.price/100).toFixed(2)}` : `Soap ID not in database.`;
+    return soap ? `${soap.id} ${soap.name} Unit Price: $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}` : `Soap ID not in database.`;
     
     }
 
@@ -50,13 +48,15 @@ function destroy (soaps, soapId) {
 
 }
 
-function update(soaps, soapId, updatedSoap, priceInCents) {
+function update(soaps, id, name, priceInCents) {
+    if (!name || !priceInCents || !id || typeof priceInCents !== 'number'){
+        inform(`Command line argument must take the following format \"npm run update <id> <string> <price in cents>\"`)
+        return;
+    }
     const indexOfSoap = soaps.findIndex((soap) => soap.id === process.argv[3]);
+
     if (indexOfSoap > -1) {
-    soaps[indexOfSoap].id = soapId;
-    soaps[indexOfSoap].name = updatedSoap;
-    soaps[indexOfSoap].price = priceInCents;
-    // soaps[updatedSoap].price;
+    soaps[indexOfSoap] = { id, name, priceInCents };
     inform("Soap updated successfully:\n");
     inform(index(soaps));
     return soaps;
@@ -67,27 +67,34 @@ function update(soaps, soapId, updatedSoap, priceInCents) {
     }
 }
 
+function indexCart(cart) {
+
+    inform(`-- Current Cart --`);
+    return cart ? cart.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`).join('\n') : null;
+}
+
 function updateCart (cart, soaps, soapId) {
 
-
-     const soap = soaps.find((soap) =>
+    const soapBar = soaps.find((soap) =>
         soap.id === soapId
     );
 
-    if (soap)
-     cart.push(soap)
+if (soapBar)
+    {
+     cart.push(soapBar);
+     inform(`Item ${soapBar.name} with ID ${soapBar.id} has been added to your cart(${cart.length}).\n`);
+     inform(index(cart));
 
-     inform(`Item ${soap.name} with ID ${soap.id} has been added to your cart(${cart.length}).`)
      const indexOfSoap = soaps.findIndex((soap) => soap.id === soapId);
+
       if (indexOfSoap > -1) 
           soaps.splice(indexOfSoap, 1);
-      else {
-          inform("Soap does not exist in inventory\n");
-          inform(index(soaps));
-      }
-     
 
      return cart;
+    }
+else
+return inform(`Soap does not exist in database.`);
+   
 }
 
 function removeFromCart (cart, soaps, soapId) {
@@ -97,9 +104,11 @@ function removeFromCart (cart, soaps, soapId) {
         soaps.push(cart[indexOfCart]);
         cart.splice(indexOfCart, 1);
         inform(`Soap removed from cart(${cart.length})`);
+        inform(indexCart(cart));
         return cart;
     } else {
         inform(`This ID does not match item in Cart.`)
+        inform(indexCart(cart));
         return cart;
     }
 
@@ -112,7 +121,7 @@ function emptyCart (cart, soaps) {
 
         soaps.push(temp);
     }
-
+    inform (`Cart is empty.`);
     return cart;
 }
 
@@ -125,4 +134,5 @@ module.exports = {
     updateCart,
     removeFromCart,
     emptyCart,
+    indexCart,
 }

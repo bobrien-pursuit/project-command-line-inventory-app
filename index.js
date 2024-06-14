@@ -1,5 +1,5 @@
 const { readJSONFile, writeJSONFile } = require("./src/helpers.js");
-const { create, index, show, destroy, update, updateCart, removeFromCart, emptyCart} = require("./src/soapController.js");
+const { create, index, show, destroy, update, updateCart, removeFromCart, emptyCart, indexCart} = require("./src/soapController.js");
 
 const inform = console.log;
 
@@ -32,7 +32,9 @@ function run() {
         case "update":
             updatedSoaps = update(soaps, process.argv[3], process.argv[4], process.argv[5]);
             writeToFile = true;
-            inform(index(soaps));
+            break;
+        case "indexCart":
+            inform(indexCart(cart));
             break;
         case "cartTotal":
             const cartTotal = cart.reduce((acc, curr) => acc + curr.price, 0);
@@ -61,11 +63,11 @@ function run() {
         
     }
 
-    if (writeToFile) {
+    if (writeToFile && updatedSoaps) {
         writeJSONFile("./data", "soaps.json", updatedSoaps);
     }
 
-    if (writeToCart) {
+    if (writeToCart && updatedCart) {
         writeJSONFile("./data", "cart.json", updatedCart);
     }
 }
