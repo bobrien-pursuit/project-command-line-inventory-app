@@ -29,16 +29,16 @@ function index(soaps) {
     return soaps ? soaps.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`).join('\n') + `\n`: null;
 }
 
-function show(soaps, soapId) {
+function show(soaps, id) {
     
-    const soap = soaps.find((soap) => soap.id === soapId);
+    const soap = soaps.find((soap) => soap.id === id);
     
     return soap ? `\n${soap.id} ${soap.name} Unit Price: $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}\n` : `Soap ID not in database.`;
     
     }
 
-function destroy (soaps, soapId) {
-    const indexOfSoap = soaps.findIndex((soap) => soap.id === soapId);
+function destroy (soaps, id) {
+    const indexOfSoap = soaps.findIndex((soap) => soap.id === id);
     if (indexOfSoap > -1) {
         soaps.splice(indexOfSoap, 1);
         inform(chalk.white("\nSoap removed:\n"));
@@ -90,7 +90,7 @@ if (soapBar)
      inform(chalk.white(`\nItem ${soapBar.name} with ID ${soapBar.id} has been added to your cart(${cart.length}).\n`));
      inform(chalk.green(indexCart(cart)));
 
-     const indexOfSoap = soaps.findIndex((soap) => soap.id === soapId);
+     const indexOfSoap = soaps.findIndex((soap) => soap.id === id);
 
       if (indexOfSoap > -1) 
           soaps.splice(indexOfSoap, 1);
