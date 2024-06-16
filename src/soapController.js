@@ -129,7 +129,7 @@ function emptyCart (cart, soaps) {
         soaps.push(temp);
     }
     inform (chalk.white(`\nCart is empty\n`));
-    return cart [""];
+    return cart;
 }
 
 module.exports = {
