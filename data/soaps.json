@@ -13,5 +13,10 @@
     "name": "Rock 'N Roll",
     "id": "95_rP",
     "priceInCents": "400"
+  },
+  {
+    "name": "Daydream",
+    "id": "84Ore",
+    "priceInCents": "550"
   }
 ]
