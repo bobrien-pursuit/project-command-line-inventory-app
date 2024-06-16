@@ -26,6 +26,8 @@ function create (soaps, name, priceInCents) {
 
 function index(soaps) {
     inform(chalk.blue(`\n-- Current Inventory --`));
+    if(soaps[0] == [""])
+        soaps.shift();
     return soaps ? soaps.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`).join('\n') + `\n`: [""];
 }
 
@@ -75,6 +77,8 @@ function update(soaps, id, name, priceInCents) {
 function indexCart(cart) {
 
     inform(chalk.green(`\n-- Current Cart --`));
+    if(cart[0] == [""])
+        cart.shift();
     return cart ? `\n` + cart.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`).join('\n') + `\n` : [""];
 }
 
