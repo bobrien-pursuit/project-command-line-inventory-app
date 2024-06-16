@@ -78,10 +78,10 @@ function indexCart(cart) {
     return cart ? `\n` + cart.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`).join('\n') + `\n` : null;
 }
 
-function updateCart (cart, soaps, soapId) {
+function updateCart (cart, soaps, id) {
 
     const soapBar = soaps.find((soap) =>
-        soap.id === soapId
+        soap.id === id
     );
 
 if (soapBar)
@@ -102,9 +102,9 @@ return inform(chalk.red(`\nSoap does not exist in database.`)) || null;
    
 }
 
-function removeFromCart (cart, soaps, soapId) {
+function removeFromCart (cart, soaps, id) {
 
-    const indexOfCart = cart.findIndex((soap) => soap.id === soapId);
+    const indexOfCart = cart.findIndex((soap) => soap.id === id);
     if (indexOfCart > -1 && cart.length !== 0) {
         soaps.push(cart[indexOfCart]);
         cart.splice(indexOfCart, 1);
