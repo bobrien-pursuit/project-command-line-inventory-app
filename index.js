@@ -72,7 +72,7 @@ function run() {
                         writeJSONFile("./data", "cart.json", updatedCart);
                         updatedSoaps = soaps;
                         writeJSONFile("./data", "soaps.json", updatedSoaps);
-                        un();
+                        run();
                     });
                  }
                  else if (action == `removeFromCart`){
