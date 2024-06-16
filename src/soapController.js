@@ -21,12 +21,12 @@ function create (soaps, name, priceInCents) {
     soaps.push(soap);
     inform(chalk.white(`\nSoap has been created\n`));
     inform(chalk.blue(index(soaps))+`\n`);
-    return soaps || [];
+    return soaps || [""];
 }
 
 function index(soaps) {
     inform(chalk.blue(`\n-- Current Inventory --`));
-    return soaps ? soaps.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`).join('\n') + `\n`: null;
+    return soaps ? soaps.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`).join('\n') + `\n`: [""];
 }
 
 function show(soaps, id) {
@@ -43,11 +43,11 @@ function destroy (soaps, id) {
         soaps.splice(indexOfSoap, 1);
         inform(chalk.white("\nSoap removed:\n"));
         inform(chalk.blue(index(soaps) + `\n`));
-        return soaps || [];
+        return soaps || [""];
     } else {
         inform(chalk.red("\nSoap does not exist\n"));
         inform(index(soaps));
-        return soaps || [];
+        return soaps || [""];
     }
 
 }
@@ -63,11 +63,11 @@ function update(soaps, id, name, priceInCents) {
     soaps[indexOfSoap] = { id, name, priceInCents };
     inform(chalk.white("\nSoap updated successfully:\n"));
     inform(chalk.blue(index(soaps)));
-    return soaps;
+    return soaps || [""];
     } else {
     inform(chalk.red("\nSoap doesn't exist in database:\n"));
     inform(chalk.blue(`\n` + index(soaps)));
-    return soaps || [];
+    return soaps [""];
     }
 }
 }
@@ -75,7 +75,7 @@ function update(soaps, id, name, priceInCents) {
 function indexCart(cart) {
 
     inform(chalk.green(`\n-- Current Cart --`));
-    return cart ? `\n` + cart.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`).join('\n') + `\n` : [];
+    return cart ? `\n` + cart.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`).join('\n') + `\n` : [""];
 }
 
 function updateCart (cart, soaps, id) {
@@ -95,10 +95,10 @@ if (soapBar)
       if (indexOfSoap > -1) 
           soaps.splice(indexOfSoap, 1);
 
-     return cart || [];
+     return cart;
     }
 else
-return inform(chalk.red(`\nSoap does not exist in database.`)) || [];
+return inform(chalk.red(`\nSoap does not exist in database.`));
    
 }
 
@@ -110,24 +110,22 @@ function removeFromCart (cart, soaps, id) {
         cart.splice(indexOfCart, 1);
         inform(chalk.white(`\nSoap removed from cart(${cart.length})`));
         inform(chalk.green(indexCart(cart)));
-        return cart || [];
+        return cart || [""];
     } else {
         inform(chalk.red(`\nThis ID does not match item in Cart.`));
         inform(chalk.green(indexCart(cart)));
-        return cart || [];
+        return cart || [""];
     }
 
 }
 
 function emptyCart (cart, soaps) {
     while (cart.length > 0) {
-
         let temp = cart.pop();
-
         soaps.push(temp);
     }
     inform (chalk.white(`\nCart is empty\n`));
-    return cart || [];
+    return cart [""];
 }
 
 module.exports = {
