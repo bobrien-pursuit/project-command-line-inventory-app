@@ -39,12 +39,17 @@ function run() {
                         run();
                     });
                } else if (action == `destroy`){
+                if (soaps.length === 0) {
+                    inform(chalk.red(`\nCurrent Inventory is Empty\n`))
+                    run()
+                } else {
                     rl.question(chalk.white(`Enter Soap ID to remove from database? `), (id) => {
                         updatedSoaps = destroy(soaps, id);
                         writeJSONFile("./data", "soaps.json", updatedSoaps);
                         run();
                     });
                 }
+            }
                  else if (action == `update`){
                     rl.question(chalk.white(`Enter ID of the soap you would like to update? `), (id) => {
                         rl.question(chalk.white(`What would you like to call your new soap? `), (name) => {
@@ -76,6 +81,11 @@ function run() {
                     });
                  }
                  else if (action == `removeFromCart`){
+                    if (cart.length === 0) {
+                        inform(chalk.red(`\nCart is Empty\n`));
+                        run();
+                    }
+                    else{
                     inform(chalk.green(indexCart(cart)));
                     rl.question(chalk.white(`Enter ID of the soap you would like to remove from your Cart? `), (id) => {
                         updatedCart = removeFromCart(cart, soaps, id);
@@ -84,6 +94,7 @@ function run() {
                         writeJSONFile("./data", "soaps.cart", updatedSoaps);
                         run();
                     });
+                }
                  }
                  else if (action == `emptyCart`) {
                      updatedCart = emptyCart(cart, soaps);

@@ -1,22 +1,12 @@
 [
   {
-    "id": "MQW02",
-    "name": "Fire",
+    "name": "Silky Smooth",
+    "id": "m8W_B",
     "priceInCents": "500"
   },
   {
-    "name": "Rock 'N Roll",
-    "id": "95_rP",
-    "priceInCents": "400"
-  },
-  {
-    "name": "Daydream",
-    "id": "84Ore",
-    "priceInCents": "550"
-  },
-  {
-    "name": "Cinnamon Spice II",
-    "id": "juJMl",
-    "priceInCents": "500"
+    "name": "Holla Dolla",
+    "id": "mNZxg",
+    "priceInCents": 500
   }
 ]
