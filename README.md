@@ -4,7 +4,7 @@ This is a Command Line Inventory App that helps keep track of inventory in a sto
 
 ## Starting Soap Inventory App
 
-The Soap Inventory App starts with the following command: 'npm run'. The user will then be prompted until the user types quit to end the program. 
+The Soap Inventory App starts with the following command: 'npm start'. The user will then be prompted until the user types quit to end the program. 
 
 ## Command Line
 
