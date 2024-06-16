@@ -14,7 +14,7 @@ Users can execute the following Commands:
 
 **index** - index prints a list of the current inventory.
 
-**show** - show takes an ID prints the details of the item in the database.
+**show** - show takes an ID of a soap that's in the Current Database and prints the details of the item in the Current Inventory.
 
 **destroy** - destroy takes an ID and removes that soap from the database.
 
