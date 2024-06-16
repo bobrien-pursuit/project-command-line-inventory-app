@@ -2,6 +2,7 @@ const { readJSONFile, writeJSONFile } = require("./src/helpers.js");
 const { create, index, show, destroy, update, updateCart, removeFromCart, emptyCart, indexCart} = require("./src/soapController.js");
 const chalk = require("chalk");
 var figlet = require("figlet");
+const lolcats = require("lolcats");
 
 const readline = require('node:readline');
 const { stdin: input, stdout: output } = require('node:process');
@@ -104,15 +105,14 @@ function run() {
             }); // end rl
         }; // end run
 
-        inform(chalk.red(
+        lolcats.print(
             figlet.textSync("Soap Store", {
               font: "Caligraphy2",
               horizontalLayout: "default",
               verticalLayout: "default",
               width: 110,
               whitespaceBreak: false,
-            }) + `\n`)
-          );
+            }) + `\n`);
 
          run();
 
