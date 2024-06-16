@@ -6,6 +6,7 @@ const cart = readJSONFile("data", "cart.json");
 const chalk = require("chalk");
 
 
+
 const inform = console.log;
 
 
@@ -98,7 +99,7 @@ if (soapBar)
      return cart;
     }
 else
-return inform(chalk.red(`Soap does not exist in database.`));
+return inform(chalk.red(`Soap does not exist in database.`)) || null;
    
 }
 
