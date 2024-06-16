@@ -18,36 +18,36 @@ function run() {
     let soaps = readJSONFile("./data", "soaps.json");
     let cart = readJSONFile("./data", "cart.json");
     
-      rl.question(`What would you like to do?: `, (action) => {
+      rl.question(chalk.white(`What would you like to do?: `), (action) => {
                     if (action == 'index'){
                         inform(chalk.blue(index(soaps) + '\n'));
                         run();
                     }
                  else if (action == `create`){
-                    rl.question (`What would you like to name your soap? `, (name) => {
-                        rl.question (`How much should it cose (in cents)? `, (priceInCents) => {
+                    rl.question (chalk.white(`What would you like to name your soap? `), (name) => {
+                        rl.question (chalk.white(`How much should it cose (in cents)? `), (priceInCents) => {
                             updatedSoaps = create(soaps, name, priceInCents);
                             writeJSONFile("./data", "soaps.json", updatedSoaps);
                             run();
                         }); // end price
                     }); // end name
                } else if (action == `show`){
-                    rl.question (`What is the ID of the soap you would like to see? `, (id) => {
+                    rl.question (chalk.white(`What is the ID of the soap you would like to see? `), (id) => {
                         const soapById = show(soaps, id);
                         inform(soapById);
                         run();
                     });
                } else if (action == `destroy`){
-                    rl.question(`Enter Soap ID to remove from database? `, (id) => {
+                    rl.question(chalk.white(`Enter Soap ID to remove from database? `), (id) => {
                         updatedSoaps = destroy(soaps, id);
                         writeJSONFile("./data", "soaps.json", updatedSoaps);
                         run();
                     });
                 }
                  else if (action == `update`){
-                    rl.question(`Enter ID of the soap you would like to update? `, (id) => {
-                        rl.question(`What would you like to call your new soap? `, (name) => {
-                            rl.question(`What will be the price of the soap (in cents)? `, (priceInCents) => {
+                    rl.question(chalk.white(`Enter ID of the soap you would like to update? `), (id) => {
+                        rl.question(chalk.white(`What would you like to call your new soap? `), (name) => {
+                            rl.question(chalk.white(`What will be the price of the soap (in cents)? `), (priceInCents) => {
                                 updatedSoaps = update(soaps, id, name, priceInCents);
                                 writeJSONFile("./data", "soaps.json", updatedSoaps);
                                 run();
@@ -66,7 +66,7 @@ function run() {
                 }
                 else if (action == `updateCart`){
                     inform(chalk.blue(index(soaps)));
-                    rl.question(`Enter ID of the soap you would like to add to your Cart? `, (id) => {
+                    rl.question(chalk.white(`Enter ID of the soap you would like to add to your Cart? `), (id) => {
                                 updatedCart = updateCart(cart, soaps, id);
                                 writeJSONFile("./data", "cart.json", updatedCart);
                                 updatedSoaps = soaps;
@@ -76,7 +76,7 @@ function run() {
                  }
                  else if (action == `removeFromCart`){
                     inform(chalk.green(indexCart(cart)));
-                    rl.question(`Enter ID of the soap you would like to remove from your Cart? `, (id) => {
+                    rl.question(chalk.white(`Enter ID of the soap you would like to remove from your Cart? `), (id) => {
                         updatedCart = removeFromCart(cart, soaps, id);
                         writeJSONFile("./data", "cart.json", updatedCart);
                         updatedSoaps = soaps;
@@ -92,7 +92,7 @@ function run() {
                      run();
                     }
                 else if (action == `quit`){
-                    inform("\nThank you for shopping at Soap Store. Have a great Day!");
+                    inform(chalk.white("\nThank you for shopping at Soap Store. Have a great Day!"));
                     rl.close();
                 }
                 else
