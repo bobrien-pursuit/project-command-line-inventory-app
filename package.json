@@ -4,16 +4,6 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "create": "node index.js create",
-    "index": "node index.js index",
-    "show": "node index.js show",
-    "destroy": "node index.js destroy",
-    "update": "node index.js update",
-    "updateCart": "node index.js updateCart",
-    "removeFromCart": "node index.js removeFromCart",
-    "emptyCart": "node index.js emptyCart",
-    "cartTotal": "node index.js cartTotal",
-    "indexCart": "node index.js indexCart"
   },
   "keywords": [],
   "author": "Brendan O'Brien",
