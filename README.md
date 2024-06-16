@@ -2,6 +2,10 @@
 
 This is a Command Line Inventory App that helps keep track of inventory in a store that sells soaps. 
 
+## Starting Soap Inventory App
+
+The Soap Inventory App starts with the following command: 'npm run'. The user will then be prompted until the user types quit to end the program. 
+
 ## Command Line
 
 Users can execute the following Commands:
@@ -25,3 +29,5 @@ Users can execute the following Commands:
 **cartTotal** - cartTotal will print the total price of all of the soap items in your Cart. 
 
 **indexCart** - this prints all items in your Cart.
+
+**quit** - ends the program.
