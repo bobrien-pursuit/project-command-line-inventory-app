@@ -12,25 +12,27 @@ const inform = console.log;
 function create (soaps, name, priceInCents) {
   
  const soap =  {
-        name: process.argv[3],
+        name: name,
         id: nanoid(5),
         priceInCents: priceInCents || 500,
     };
 
     soaps.push(soap);
+    inform(chalk.white(`Soap has been created\n`));
+    inform(chalk.blue(index(soaps))+`\n`);
     return soaps;
 }
 
 function index(soaps) {
-    inform(chalk.blue(`-- Current Inventory --`));
-    return soaps ? soaps.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`).join('\n') : null;
+    inform(chalk.blue(`\n-- Current Inventory --`));
+    return soaps ? soaps.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`).join('\n') + `\n`: null;
 }
 
 function show(soaps, soapId) {
     
     const soap = soaps.find((soap) => soap.id === soapId);
     
-    return soap ? `${soap.id} ${soap.name} Unit Price: $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}` : `Soap ID not in database.`;
+    return soap ? `\n${soap.id} ${soap.name} Unit Price: $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}\n` : `Soap ID not in database.`;
     
     }
 
@@ -38,8 +40,8 @@ function destroy (soaps, soapId) {
     const indexOfSoap = soaps.findIndex((soap) => soap.id === soapId);
     if (indexOfSoap > -1) {
         soaps.splice(indexOfSoap, 1);
-        inform(chalk.white("Soap removed:\n"));
-        inform(index(soaps));
+        inform(chalk.white("\nSoap removed:\n"));
+        inform(chalk.blue(index(soaps) + `\n`));
         return soaps;
     } else {
         inform(chalk.red("Soap does not exist\n"));
@@ -55,7 +57,7 @@ function update(soaps, id, name, priceInCents) {
         return;
     }
     else {
-    const indexOfSoap = soaps.findIndex((soap) => soap.id === process.argv[3]);
+    const indexOfSoap = soaps.findIndex((soap) => soap.id === id);
 
     if (indexOfSoap > -1) {
     soaps[indexOfSoap] = { id, name, priceInCents };
@@ -72,8 +74,8 @@ function update(soaps, id, name, priceInCents) {
 
 function indexCart(cart) {
 
-    inform(chalk.green(`-- Current Cart --`));
-    return cart ? cart.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`).join('\n') : null;
+    inform(chalk.green(`\n-- Current Cart --`));
+    return cart ? `\n` + cart.map((soap) => `${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`).join('\n') + `\n` : null;
 }
 
 function updateCart (cart, soaps, soapId) {
@@ -85,8 +87,8 @@ function updateCart (cart, soaps, soapId) {
 if (soapBar)
     {
      cart.push(soapBar);
-     inform(chalk.white(`Item ${soapBar.name} with ID ${soapBar.id} has been added to your cart(${cart.length}).\n`));
-     inform(chalk.green(index(cart)));
+     inform(chalk.white(`\nItem ${soapBar.name} with ID ${soapBar.id} has been added to your cart(${cart.length}).\n`));
+     inform(chalk.green(indexCart(cart)));
 
      const indexOfSoap = soaps.findIndex((soap) => soap.id === soapId);
 
@@ -106,11 +108,11 @@ function removeFromCart (cart, soaps, soapId) {
     if (indexOfCart > -1 && cart.length !== 0) {
         soaps.push(cart[indexOfCart]);
         cart.splice(indexOfCart, 1);
-        inform(chalk.white(`Soap removed from cart(${cart.length})`));
+        inform(chalk.white(`\nSoap removed from cart(${cart.length})`));
         inform(chalk.green(indexCart(cart)));
         return cart;
     } else {
-        inform(chalk.red(`This ID does not match item in Cart.`));
+        inform(chalk.red(`\nThis ID does not match item in Cart.`));
         inform(chalk.green(indexCart(cart)));
         return cart;
     }
@@ -124,7 +126,7 @@ function emptyCart (cart, soaps) {
 
         soaps.push(temp);
     }
-    inform (chalk.white(`Cart is empty.`));
+    inform (chalk.white(`\nCart is empty\n`));
     return cart;
 }
 
