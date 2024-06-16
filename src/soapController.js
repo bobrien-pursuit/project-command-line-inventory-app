@@ -21,7 +21,7 @@ function create (soaps, name, priceInCents) {
     soaps.push(soap);
     inform(chalk.white(`\nSoap has been created\n`));
     inform(chalk.blue(index(soaps))+`\n`);
-    return soaps;
+    return soaps || null;
 }
 
 function index(soaps) {
@@ -33,7 +33,7 @@ function show(soaps, id) {
     
     const soap = soaps.find((soap) => soap.id === id);
     
-    return soap ? `\n${soap.id} ${soap.name} Unit Price: $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}\n` : `Soap ID not in database.`;
+    return soap ? `\n${soap.id} ${soap.name} Unit Price: $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}\n` : `\nSoap ID not in database.`;
     
     }
 
