@@ -18,7 +18,7 @@ function create (soaps, name, priceInCents) {
     };
 
     soaps.push(soap);
-    inform(chalk.white(`Soap has been created\n`));
+    inform(chalk.white(`\nSoap has been created\n`));
     inform(chalk.blue(index(soaps))+`\n`);
     return soaps;
 }

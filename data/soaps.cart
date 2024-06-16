@@ -1,10 +1,5 @@
 [
   {
-    "name": "Cinnamon Spice II",
-    "id": "juJMl",
-    "priceInCents": "500"
-  },
-  {
     "id": "MQW02",
     "name": "Fire",
     "priceInCents": "500"
@@ -13,5 +8,15 @@
     "name": "Rock 'N Roll",
     "id": "95_rP",
     "priceInCents": "400"
+  },
+  {
+    "name": "Daydream",
+    "id": "84Ore",
+    "priceInCents": "550"
+  },
+  {
+    "name": "Cinnamon Spice II",
+    "id": "juJMl",
+    "priceInCents": "500"
   }
 ]

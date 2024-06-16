@@ -1,10 +1,5 @@
 [
   {
-    "name": "Cinnamon Spice II",
-    "id": "juJMl",
-    "priceInCents": "500"
-  },
-  {
     "id": "MQW02",
     "name": "Fire",
     "priceInCents": "500"
@@ -15,8 +10,13 @@
     "priceInCents": "400"
   },
   {
-    "name": "Daydream",
-    "id": "84Ore",
-    "priceInCents": "550"
+    "name": "Sesame Street",
+    "id": "p64Kg",
+    "priceInCents": "650"
+  },
+  {
+    "name": "Smooth Operator",
+    "id": "jOuHY",
+    "priceInCents": "600"
   }
 ]

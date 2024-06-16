@@ -67,11 +67,11 @@ function run() {
                 else if (action == `updateCart`){
                     inform(chalk.blue(index(soaps)));
                     rl.question(chalk.white(`Enter ID of the soap you would like to add to your Cart? `), (id) => {
-                                updatedCart = updateCart(cart, soaps, id);
-                                writeJSONFile("./data", "cart.json", updatedCart);
-                                updatedSoaps = soaps;
-                                writeJSONFile("./data", "soaps.json", updatedSoaps);
-                                run();
+                        updatedCart = updateCart(cart, soaps, id);
+                        writeJSONFile("./data", "cart.json", updatedCart);
+                        updatedSoaps = soaps;
+                        writeJSONFile("./data", "soaps.json", updatedSoaps);
+                        un();
                     });
                  }
                  else if (action == `removeFromCart`){
