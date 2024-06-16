@@ -45,7 +45,7 @@ function destroy (soaps, soapId) {
         inform(chalk.blue(index(soaps) + `\n`));
         return soaps;
     } else {
-        inform(chalk.red("Soap does not exist\n"));
+        inform(chalk.red("\nSoap does not exist\n"));
         inform(index(soaps));
         return soaps;
     }
@@ -54,7 +54,6 @@ function destroy (soaps, soapId) {
 
 function update(soaps, id, name, priceInCents) {
     if (!name && !priceInCents && !id && typeof priceInCents !== 'number'){
-        inform(chalk.white(`Command line argument must take the following format \"npm run update <id> <string> <price in cents>\"`));
         return;
     }
     else {
@@ -62,12 +61,12 @@ function update(soaps, id, name, priceInCents) {
 
     if (indexOfSoap > -1) {
     soaps[indexOfSoap] = { id, name, priceInCents };
-    inform(chalk.white("Soap updated successfully:\n"));
+    inform(chalk.white("\nSoap updated successfully:\n"));
     inform(chalk.blue(index(soaps)));
     return soaps;
     } else {
-    inform(chalk.red("Soap doesn't exist in database:\n"));
-    inform(chalk.blue(index(soaps)));
+    inform(chalk.red("\nSoap doesn't exist in database:\n"));
+    inform(chalk.blue(`\n` + index(soaps)));
     return soaps;
     }
 }
@@ -99,7 +98,7 @@ if (soapBar)
      return cart;
     }
 else
-return inform(chalk.red(`Soap does not exist in database.`)) || null;
+return inform(chalk.red(`\nSoap does not exist in database.`)) || null;
    
 }
 
