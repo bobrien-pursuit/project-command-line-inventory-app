@@ -12,6 +12,7 @@
   "description": "This is a soap shop that sells natural handmade soap.",
   "dependencies": {
     "chalk": "^2.4.2",
+    "figlet": "^1.7.0",
     "nanoid": "^3.3.7"
   }
 }
