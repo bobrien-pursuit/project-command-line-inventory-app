@@ -11,36 +11,44 @@ const inform = console.log;
 
 const rl = readline.createInterface({ input, output });
 
-function run() {
+function run() { // main app
 
-    let writeToCart = false;
     let updatedSoaps = [];
     let updatedCart = [];
     let soaps = readJSONFile("./data", "soaps.json");
     let cart = readJSONFile("./data", "cart.json");
     
-      rl.question(chalk.white(`What would you like to do?: `), (action) => {
+      rl.question(chalk.white(`What would you like to do?: `), (action) => { // main question
                     if (action == 'index'){
                         inform(chalk.blue(index(soaps) + '\n'));
                         run();
-                    }
-                 else if (action == `create`){
+                    } else if (action == `create`){
                     rl.question (chalk.white(`What would you like to name your soap? `), (name) => {
                         rl.question (chalk.white(`How much should it cose (in cents)? `), (priceInCents) => {
+                            if (typeof priceInCents != 'number'){
+                                inform(chalk.red(`\nCannot create soap, price must be in cents\n`));
+                                run();
+                            } else {
                             updatedSoaps = create(soaps, name, priceInCents);
                             writeJSONFile("./data", "soaps.json", updatedSoaps);
                             run();
-                        }); // end price
-                    }); // end name
-               } else if (action == `show`){
+                        
+                    }
+                }); // index cost
+            }); // index name
+        } // create
+        
+               else if (action == `show`){
                     rl.question (chalk.white(`What is the ID of the soap you would like to see? `), (id) => {
                         const soapById = show(soaps, id);
                         inform(soapById);
                         run();
-                    });
-               } else if (action == `destroy`){
+                    }); // soap ID
+                }  // show
+                
+                else if (action == `destroy`){
                 if (soaps.length === 0) {
-                    inform(chalk.red(`\nCurrent Inventory is Empty\n`))
+                    inform(chalk.red(`\nCurrent Inventory is Empty\n`));
                     run()
                 } else {
                     rl.question(chalk.white(`Enter Soap ID to remove from database? `), (id) => {
@@ -49,71 +57,91 @@ function run() {
                         run();
                     });
                 }
-            }
+            } // show
+    
                  else if (action == `update`){
+                    inform(`\n` + chalk.blue(index(soaps) + `\n`));
                     rl.question(chalk.white(`Enter ID of the soap you would like to update? `), (id) => {
+                        if (soaps.find((soap) => soap.id !== id)){
+                            inform(chalk.red(`\nID not found in Current Inventory\n`))
+                            run();
+                        } else {
                         rl.question(chalk.white(`What would you like to call your new soap? `), (name) => {
                             rl.question(chalk.white(`What will be the price of the soap (in cents)? `), (priceInCents) => {
+                                if (Number(priceInCents) < 0 ){
+                                    inform(chalk.red(`\nCannot create soap, price must be in cents\n`));
+                                    run();
+                                }
                                 updatedSoaps = update(soaps, id, name, priceInCents);
                                 writeJSONFile("./data", "soaps.json", updatedSoaps);
                                 run();
                             });
                         });
-                    });
-                }
+                    }
+                });
+            } //update
+
                 else if (action == `indexCart`){
                     inform(chalk.green(indexCart(cart)));
                     run();
-                }
+                } // indexCart
                 else if (action == `cartTotal`){
                     const cartTotal = cart.reduce((acc, curr) => acc + Number(curr.priceInCents), 0);
                     inform(chalk.white(`\nYour Cart total is: $${Number.parseFloat(cartTotal/100).toFixed(2)}`) + `\n`);
                     run();
-                }
+                } // cartTotal
                 else if (action == `updateCart`){
                     inform(chalk.blue(index(soaps)));
                     rl.question(chalk.white(`Enter ID of the soap you would like to add to your Cart? `), (id) => {
+                        if (cart.find((soap) => soap.id !== id)){
+                            inform(chalk.red(`\nID not found in Cart\n`))
+                        } else {
                         updatedCart = updateCart(cart, soaps, id);
                         writeJSONFile("./data", "cart.json", updatedCart);
                         updatedSoaps = soaps;
                         writeJSONFile("./data", "soaps.json", updatedSoaps);
                         run();
+                        }
                     });
-                 }
-                 else if (action == `removeFromCart`){
+                } // updateCart
+                
+                else if (action == `removeFromCart`){
                     if (cart.length === 0) {
                         inform(chalk.red(`\nCart is Empty\n`));
                         run();
-                    }
-                    else{
+                    } else {
                     inform(chalk.green(indexCart(cart)));
                     rl.question(chalk.white(`Enter ID of the soap you would like to remove from your Cart? `), (id) => {
+                        if (cart.find((soap) => soap.id !== id))
+                            inform(chalk.red(`\nID not found in Current Inventory\n`))
+                        else {
                         updatedCart = removeFromCart(cart, soaps, id);
                         writeJSONFile("./data", "cart.json", updatedCart);
                         updatedSoaps = soaps;
                         writeJSONFile("./data", "soaps.cart", updatedSoaps);
                         run();
+                        }
                     });
                 }
-                 }
+            } // removeFromCart
+                 
                  else if (action == `emptyCart`) {
-                     updatedCart = emptyCart(cart, soaps);
+                     let updatedCart = emptyCart(cart, soaps);
                      writeJSONFile("./data", "cart.json", updatedCart);
                      updatedSoaps = soaps;
                      writeJSONFile("./data", "soaps.cart", updatedSoaps);
                      run();
-                    }
+                    } // emptyCart
+
                 else if (action == `quit`){
                     inform(chalk.white("\nThank you for shopping at Soap Store. Have a great Day!"));
                     rl.close();
-                }
+                } // quit
                 else
                     run();
             
-                if (writeToCart && updatedCart) {
-                    writeJSONFile("./data", "cart.json", updatedCart);
-                }
-            }); // end rl
+                
+            }); // end main question
         }; // end run
 
         lolcats.print(
