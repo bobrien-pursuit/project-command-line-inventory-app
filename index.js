@@ -41,7 +41,7 @@ function run() { // main app
                else if (action == `show`){
                     rl.question (chalk.white(`What is the ID of the soap you would like to see? `), (id) => {
                         const soapById = show(soaps, id);
-                        inform(soapById);
+                        inform(chalk.green(soapById));
                         run();
                     }); // soap ID
                 }  // show

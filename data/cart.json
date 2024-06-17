@@ -1,5 +1,10 @@
 [
   {
+    "name": "something",
+    "id": "_3Jkb",
+    "priceInCents": 500
+  },
+  {
     "name": "hello",
     "id": "EIpsf",
     "priceInCents": 500
