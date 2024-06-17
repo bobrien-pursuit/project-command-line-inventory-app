@@ -152,8 +152,8 @@ function run() { // main app
         lolcats.print(
             figlet.textSync("Soap Store", {
               font: "Caligraphy2",
-              horizontalLayout: "default",
-              verticalLayout: "default",
+              horizontalLayout: "smushing",
+              verticalLayout: "smushing",
               width: 110,
               whitespaceBreak: false,
             }) + `\n`);
