@@ -74,13 +74,9 @@ function update(soaps, id, name, priceInCents) {
 
 function indexCart(cart) {
 
-    if (cart.length !== 0) {
-        inform(chalk.green(`\n-- Current Cart --`));
-        let currentCartArray = cart.map((soap) => { inform(chalk.green(`${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`))}); 
-        currentCartArray.join('\n');
-        return currentCartArray;
-}  else
-        return inform(chalk.red(`\nCart is Empty.\n`));
+  //  if (cart.length > 0)
+        inform(chalk.green(`\n-- Current Cart\n`));
+        return cart ? cart.map((soap) => { inform(chalk.green(`${soap.id} ${soap.name} $${Number.parseFloat(soap.priceInCents/100).toFixed(2)}`))}).join(`\n`) : inform(chalk.red(`\nCart is Empty.\n`));
 }
 
 function updateCart (cart, soaps, id) {
