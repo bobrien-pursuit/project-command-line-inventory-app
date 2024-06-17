@@ -116,24 +116,26 @@ function run() { // main app
                         if (cart.find((soap) => soap.id === id)){
                         updatedCart = removeFromCart(cart, soaps, id);
                         writeJSONFile("./data", "cart.json", updatedCart);
-                      //  updatedSoaps = soaps;
-                        writeJSONFile("./data", "soaps.cart", soaps);
+                        updatedSoaps = soaps;
+                        writeJSONFile("./data", "soaps.cart", updatedSoaps);
                         run();
                     }
-                        else {
-                            inform(chalk.red(`\nID not found in Cart\n`));
-                            run();
-                            }
                     });
                 }
             } // removeFromCart
                  
                  else if (action == `emptyCart`) {
-                     updatedCart = cart;
-                     writeJSONFile("./data", "cart.json", updatedCart);
-                     updatedSoaps = soaps;
-                     writeJSONFile("./data", "soaps.cart", updatedSoaps);
-                     run();
+                    if (cart.length > 0){
+                        updatedCart = emptyCart (cart, soaps)
+                        writeJSONFile("./data", "cart.json", []);
+                        updatedSoaps = soaps;
+                        writeJSONFile("./data", "soaps.cart", updatedSoaps);
+                        run();
+                    } else {
+                        writeJSONFile("./data", "cart.jason", []);
+                        inform(chalk.red(`Cart already empty.`));
+                        run();
+                    }
                     } // emptyCart
 
                 else if (action == `quit`){

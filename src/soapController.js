@@ -125,8 +125,9 @@ function removeFromCart (cart, soaps, id) {
 }
 
 function emptyCart (cart, soaps) {
+    let temp = {};
     while (cart.length > 0) {
-        let temp = cart.pop();
+        temp = cart.pop();
         soaps.push(temp);
     }
     inform (chalk.white(`\nCart is empty\n`));

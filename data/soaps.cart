@@ -1,7 +1,12 @@
 [
   {
-    "name": "bad",
-    "id": "2ImjM",
-    "priceInCents": "100"
+    "name": "hello",
+    "id": "EIpsf",
+    "priceInCents": 500
+  },
+  {
+    "name": "boo",
+    "id": "XYcwp",
+    "priceInCents": 500
   }
 ]
